@@ -21,3 +21,5 @@ target
 *.ipr
 
 stripe.properties
+
+transaction-logs/
