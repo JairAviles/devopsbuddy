@@ -1,7 +1,5 @@
 package com.devopsbuddy.backend.persistance.domain.backend;
 
-import com.devopsbuddy.backend.persistance.domain.backend.Plan;
-import com.devopsbuddy.backend.persistance.domain.backend.UserRole;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +18,6 @@ public class User implements Serializable, UserDetails {
 
     /** The Serial Version UID for Serializable classes. */
     private static final long serialVersionUID = 1L;
-
 
     public User() {
 
@@ -68,6 +65,21 @@ public class User implements Serializable, UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new HashSet<>();
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "user"
+    )
+    private Set<PasswordResetToken> passwordResetTokens = new HashSet<>();
+
+    public Set<PasswordResetToken> getPasswordResetTokens() {
+        return passwordResetTokens;
+    }
+
+    public void setPasswordResetTokens(Set<PasswordResetToken> passwordResetTokens) {
+        this.passwordResetTokens = passwordResetTokens;
+    }
 
     public long getId() {
         return id;

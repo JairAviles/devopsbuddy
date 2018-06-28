@@ -7,7 +7,7 @@ import com.devopsbuddy.backend.persistance.domain.backend.UserRole;
 import com.devopsbuddy.backend.service.UserService;
 import com.devopsbuddy.enums.PlansEnum;
 import com.devopsbuddy.enums.RolesEnum;
-import com.devopsbuddy.utils.UsersUtils;
+import com.devopsbuddy.utils.UserUtils;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class UserServiceIntegrationTest {
         String email = testName.getMethodName() + "@devopsbuddy.com";
 
         Set<UserRole> userRoles = new HashSet<>();
-        User basicUser = UsersUtils.createBasicUser(username, email);
+        User basicUser = UserUtils.createBasicUser(username, email);
         userRoles.add(new UserRole(basicUser, new Role(RolesEnum.BASIC)));
 
         User user = userService.createUser(basicUser, PlansEnum.BASIC, userRoles);
